@@ -27,6 +27,15 @@ Todas las instrucciones `docker-compose` hay que ejecutarlas dentro del director
 sudo docker-compose up -d
 ```
 
+Docker incluye reglas de cortafuego muy estrictas que evitan el tráfico entre redes docker. Para poder trabajar con enrutamiento necesitamos quitar estas reglas, para ello ejecutamos en el ordenador donde hemos instalado docker estas instrucciones (si es necesario tendrás que instalar el paquete `iptables`):
+
+```
+sudo iptables -I DOCKER-ISOLATION-STAGE-1 1 -j RETURN
+sudo iptables -P FORWARD ACCEPT
+```
+
+**NOTA IMPORTANTE**: La primera instrucción la tendrás que ejecutar cada vez que levantes el escenario con `sudo docker-compose up -d`.
+
 Podemos ver los contenedores que se han creado:
 
 ```
@@ -54,12 +63,7 @@ sudo docker exec -it pc1 bash
 root@pc1:/# 
 ```
 
-Docker incluye reglas de cortafuego muy estrictas que evitan el tráfico entre redes docker. Para poder trabajar con enrutamiento necesitamos quitar estas reglas, para ello ejecutamos en el ordenador donde hemos instalado docker estas instrucciones (si es necesario tendrás que instalar el paquete `iptables`):
-
-```
-sudo iptables -I DOCKER-ISOLATION-STAGE-1 1 -j RETURN
-sudo iptables -P FORWARD ACCEPT
-```
+Ya puedes empezar a configurar el escenario para realizar las prácticas de enrutamiento o de NAT.
 
 Después de trabajar con el escenario, puedes destruirlo con:
 
