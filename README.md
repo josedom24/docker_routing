@@ -69,7 +69,7 @@ sudo docker-compose down
 
 ## Explicación detallada del fichero docker-compose
 
-1. Cuando se crean los contenedores se crea una nueva imagen llamada `midebian:latest` ejecutando el fichero `Dockerfile` que encuentras en el directorio `build`. Esta imagen se bas en la imagen `debian` pero se le instalan los paquetes necesarios para nuestro ejercicio de enrutamiento. Si al finalizar queremos borrar las imágenes, ejecutaremos:
+1. Cuando se crean los contenedores se crea una nueva imagen llamada `midebian:latest` ejecutando el fichero `Dockerfile` que encuentras en el directorio `build`. Esta imagen se basa en la imagen `debian` pero se le instalan los paquetes necesarios para nuestro ejercicio de enrutamiento. Si al finalizar queremos borrar las imágenes, ejecutaremos:
     ```
     sudo docker rmi debian:latest
     sudo docker rmi midebian:latest
