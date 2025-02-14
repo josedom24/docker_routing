@@ -76,7 +76,7 @@ sudo docker-compose down
     ```
 2. Se crean 5 redes docker:
     * La red llamada `red_externa` es la única que permite acceso al exterior, es decir, los contenedores conectadas a ella (`router1` y `pc1`) tienen una ruta por defecto a la puerta de enlace `172.25.0.1` que permite el acceso a exterior.
-    * Las redes `redX` están configuradas como redes internas (`internal: true`), esto significa que los contenedores conectados a estas redes, aunque tienen una ruta por defecto a la puerta de enlace `172.XX.0.254` (hemos indicado esa puerta de enlace para que podamos usar las direcciones 172.XX.0.1) no tienen conectividad al exterior.
+    * Las redes `redX` están configuradas como redes internas (`internal: true`), esto significa que los contenedores conectados a estas redes, aunque tienen una ruta por defecto a la puerta de enlace `172.XX.0.254` (hemos indicado esa puerta de enlace para que podamos usar las direcciones `172.XX.0.1`) no tienen conectividad al exterior.
 
 3. Se crean 6 contenedores:
     * `routerX`: Son contenedores que tienen el rol de router y están conectados a varias redes. Se ha activada el bit de forwarding (`sysctls: net.ipv4.ip_forward: "1"`) para que enrruten paquetes.
