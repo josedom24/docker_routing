@@ -1,0 +1,128 @@
+version: '3.8'
+
+services:
+  pc1:
+    build: build
+    image: midebian:latest
+    container_name: pc1
+    hostname: pc1
+    networks:
+      red_externa:
+        ipv4_address: 172.25.0.3
+    command: sleep infinity
+    cap_add:
+      - NET_ADMIN
+  router1:
+    build: build
+    image: midebian:latest
+    container_name: router1
+    hostname: router1
+    networks:
+      red_externa:
+        ipv4_address: 172.25.0.2
+      red2:
+        ipv4_address: 172.26.0.1
+    command: sleep infinity
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.ip_forward: "1"
+  router2:
+    build: build
+    image: midebian:latest
+    container_name: router2
+    hostname: router2
+    networks:
+      red2:
+        ipv4_address: 172.26.0.2
+      red3:
+        ipv4_address: 172.27.0.1
+      red4:
+        ipv4_address: 172.28.0.1
+    command: sleep infinity
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.ip_forward: "1"
+  router3:
+    build: build
+    image: midebian:latest
+    container_name: router3
+    hostname: router3
+    networks:
+      red4:
+        ipv4_address: 172.28.0.2
+      red5:
+        ipv4_address: 172.29.0.1
+    command: sleep infinity
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.ip_forward: "1"
+  pc2:
+    build: build
+    image: midebian:latest
+    container_name: pc2
+    hostname: pc2
+    networks:
+      red3:
+        ipv4_address: 172.27.0.2
+    command: sleep infinity
+    cap_add:
+      - NET_ADMIN
+  pc3:
+    build: build
+    image: midebian:latest
+    container_name: pc3
+    hostname: pc3
+    networks:
+      red5:
+        ipv4_address: 172.29.0.2
+    command: sleep infinity
+    cap_add:
+      - NET_ADMIN
+ 
+networks:
+  red_externa:
+    name: red_externa
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.25.0.0/16"
+  red2:
+    name: red2
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.26.0.0/16"
+          gateway: "172.26.0.254"
+    internal: true
+  red3:
+    name: red3
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.27.0.0/16"
+          gateway: "172.27.0.254"
+    internal: true
+  red4:
+    name: red4
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.28.0.0/16"
+          gateway: "172.28.0.254"
+    internal: true
+  red5:
+    name: red5
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.29.0.0/16"
+          gateway: "172.29.0.254"
+    internal: true
